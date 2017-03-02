@@ -1,6 +1,13 @@
 # animatediv
 
-> A Vue.js project
+> A animate div components for Vue2.x. Worked with Vue's v-bind automatically. Supported animation includes 'drop','push','flip-x' and 'flip-y'.
+
+##Usage
+
+```
+<animateDiv id="a" :text="text" :reverseDirection="reverse" :animateType="animateType"></animateDiv>
+<animateDiv id="b" :reverseDirection="reverse" :src="src" alt="图片" animateDuration="1.2s" :animateType="animateType"></animateDiv>
+```
 
 ## Build Setup
 
