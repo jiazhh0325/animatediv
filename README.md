@@ -17,6 +17,7 @@ components: {animateDiv},
 ```
 
 ##Notes
+
 > animateDiv's size should be configed first. otherwise the 'push' & 'drop' animation will not work!!!
 
 ## Build Setup
