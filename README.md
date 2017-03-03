@@ -4,10 +4,20 @@
 
 ##Usage
 
+> Import animateDiv:
+```
+import animateDiv from './components/animateDiv.vue'
+components: {animateDiv},
+
+```
+> in template:
 ```
 <animateDiv id="a" :text="text" :reverseDirection="reverse" :animateType="animateType"></animateDiv>
 <animateDiv id="b" :reverseDirection="reverse" :src="src" alt="图片" animateDuration="1.2s" :animateType="animateType"></animateDiv>
 ```
+
+##Notes
+> animateDiv's size should be configed first. otherwise the 'push' & 'drop' animation will not work!!!
 
 ## Build Setup
 

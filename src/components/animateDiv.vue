@@ -5,7 +5,10 @@
   border: solid,1px,red;
   overflow: hidden;
 }
-
+.child {
+  width: 100%;
+  height: 100%;
+}
 .animate-enter-active,.animate-leave-active{
   backface-visibility: hidden;
   position: absolute;
@@ -25,25 +28,37 @@
   <div class="ani-container">
       <div v-if="trigger==='src'">
         <transition name="animate" v-on:before-enter="beforeEnter">
-          <div  v-if="showFrontView"  key="front"><img :src="src" :alt="alt" :width="width" :height="height"></img></div>
-          <div  v-else key="back"><img :src="src" :alt="alt" :width="width" :height="height"></img></div>
+          <div class="child"  v-if="showFrontView"  key="front"><img :src="src" :alt="alt" :width="width" :height="height"></img></div>
+          <div class="child" v-else key="back"><img :src="src" :alt="alt" :width="width" :height="height"></img></div>
         </transition>
       </div>
       <div v-else>
         <transition name="animate" v-on:before-enter="beforeEnter">
-        <div  v-if="showFrontView"  key="front">{{text}}</div>
-        <div  v-else key="back">{{text}}</div>
-      </transition>
+          <div class="child" v-if="showFrontView"  key="front">{{text}}</div>
+          <div class="child" v-else key="back">{{text}}</div>
+        </transition>
       </div>
   </div>
 </template>
 
 <script>
+function getAllCssSheet(){
+  let rules={};
+  let ds=document.styleSheets,dsl=ds.length;
+  console.log(ds);
+  for (let i=0;i<dsl;++i){
+    let dsi=ds[i].cssRules;
+    let dsil=0;
+    if (dsi !== null) {
+      dsil = dsi.length;
+    }
+    for (let j=0;j<dsil;++j) rules[dsi[j].selectorText]=dsi[j];
+  }
+  return rules;
+}
+var rules = getAllCssSheet();
 
 export default{
-  created:function(){
-    this.rules = this.allRules();
-  },
   mounted:function(){
     this.width = this.$el.clientWidth + "px";
     this.height = this.$el.clientHeight + "px";
@@ -84,7 +99,6 @@ export default{
       trigger:'',
       width:0,
       height:0,
-      rules:{}
     }
   },
   watch:{
@@ -151,25 +165,11 @@ export default{
     enter:function(el){
 
     },
-    allRules:function(name){
-      let rules={};
-      let ds=document.styleSheets,dsl=ds.length;
-      console.log(ds);
-      for (let i=0;i<dsl;++i){
-        let dsi=ds[i].cssRules;
-        let dsil=0;
-        if (dsi !== null) {
-          dsil = dsi.length;
-        }
-        for (let j=0;j<dsil;++j) rules[dsi[j].selectorText]=dsi[j];
-      }
-      return rules;
-    },
     getClassSheet:function(name){
-      if (!this.rules.hasOwnProperty(name)) {
+      if (!rules.hasOwnProperty(name)) {
           throw 'do not find class'+name;
       }
-      return this.rules[name];
+      return rules[name];
     }
   }
 }

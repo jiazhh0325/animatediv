@@ -19,7 +19,7 @@
       <div class="egContainer">
         <p>动画文字(修改输入框试试)</p>
         <input v-model="text"></input>
-        <animateDiv id="a" :text="text" :reverseDirection="reverse" :animateType="animateType"></animateDiv>
+        <animateDiv id="a" :text="text" animateDuration=".3s" :reverseDirection="reverse" :animateType="animateType"></animateDiv>
       </div>
       <div class="egContainer">
         <div>图片动画(切换图片试试)</div>
@@ -58,6 +58,9 @@
         ],
       }
     },
+    methods: {
+
+    }
   }
 </script>
 
@@ -73,6 +76,7 @@
   top:20px;
   width:400px;
   height: 25px;
+  text-align: center;
 }
 #b {
   width: 100%;
